@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Branch budget center</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/branchBudgetCtr.js"></script>
+</head>
+<body ng-app="springDemo">
+<div class="container" style="margin-top: 30px" ng-controller="AppCtrl">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">List Branch_budget_ctr</div>
+                <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label>Branch budget ctr</label>
+                        <input type="text" class="form-control" ng-model="branchCopy.budgetCtrName">
+                    </div>
+                    <button type="button" class="btn btn-default" ng-click = "saveBranch(branchCopy)">Save</button>
+                </form>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <!--<th>#</th>-->
+                        <th>BRANCH_BUDGET_CTR</th>
+                        <th>BUDGET_CTR_NAME</th>
+                        <th>INACTIVE_IND</th>
+                        <th>BUDGET_TYPE</th>
+                        <th>INACTIVE_DATE</th>
+                        <th>TICKET_MODE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="branch in branches.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+
+                    <!--<th scope="row">{{ $index +1 }} </th>-->
+                    <td>{{branch.branchBudgetCtr}}</td>
+                    <!--<td>{{item.branchBudgetCtr}}</td>-->
+                    <td ng-click = "selectBranch(branch)"> {{branch.budgetCtrName}}</td>
+                    <td>{{branch.inactiveInd}}</td>
+                    <td>{{branch.budgetType}}</td>
+                    <td>{{branch.inactiveDate}}</td>
+                    <td>{{branch.ticketMode}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
+                <option>3</option>
+                <option>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>40</option>
+                <option>50</option>
+            </select> records at a time.
+
+                 <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm"
+                            boundary-links="true" rotate="false" num-pages="numPages"
+                            items-per-page="itemsPerPage"></pagination>
+                <pre>Page: {{currentPage}} / {{numPages}}</pre>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
